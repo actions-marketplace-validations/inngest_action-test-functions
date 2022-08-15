@@ -1,0 +1,78 @@
+name: Test Inngest Functions
+author: Inngest
+description: |-
+  Installs the Inngest CLI and tests found Inngest functions using either
+  generated data or replay.
+
+inputs:
+  version:
+    description: |-
+      Version of the Inngest CLI to install. If unspecified or set to "latest",
+      the latest available Inngset CLI version for the target platform will be
+      installed.
+
+      Example: "latest" or "1.5.2"
+    required: false
+    default: latest
+  function:
+    description: |-
+      The directory of the Inngest function to test. Defaults to the current
+      directory.
+
+      Example: "./functions/hello-world"
+    required: false
+    default: "."
+  replay:
+    description: |-
+      If true, we'll replay events from your Inngest Cloud account instead of
+      using generated event data
+    required: false
+    default: false
+  file:
+    description: |-
+      The path to the file containing event data to use for testing. Defaults to
+      empty (""). You can generate and save event data for this purpose using
+      `inngest run --snapshot`.
+    required: false
+    default: ""
+  prod:
+    description: |-
+      If replay is true, this flag determines whether to use the production or
+      test workspace. Defaults to false (using test).
+    required: false
+    default: false
+  key:
+    description: |-
+      An API key which will be used to authenticate with the Inngest CLI using
+      `inngest login`. Required if replaying events from your Inngest Cloud
+      account.
+    required: false
+    default: ""
+
+branding:
+  icon: terminal
+  color: blue
+
+runs:
+  using: composite
+  steps:
+    - uses: inngest/setup-inngest@v1
+      with:
+        version: ${{ inputs.version }}
+        key: ${{ inputs.key }}
+      # Must use `script -e -c` to pretend we have a TTY.
+    - name: Test with replayed events
+      if: inputs.replay == 'true'
+      run: script -e -c "inngest run --replay ${{ inputs.prod && '--prod' }}"
+      shell: bash
+      working-directory: ${{ inputs.function }}
+    - name: Test with snapshotted events
+      if: inputs.replay != 'true' && inputs.file != ''
+      run: script -e -c "cat ${{ inputs.file }} | inngest run"
+      shell: bash
+      working-directory: ${{ inputs.function }}
+    - name: Test with generated events
+      if: inputs.replay != 'true' && inputs.file == ''
+      run: script -e -c "inngest run"
+      shell: bash
+      working-directory: ${{ inputs.function }}

@@ -23,7 +23,7 @@ There are a few options you can provide:
 - `replay` - if true, we'll replay events from your [Inngest Cloud](https://www.inngest.com) account. Defaults to false.
 - `snapshot` - the path to a snapshot file to use, generated using `inngest run --snapshot`. Defaults to empty (`""`).
 - `prod` - if true and replay is true, we'll use the production data from your [Inngest Cloud](https://www.inngest.com) account. Defaults to false, meaning we'll use your test workspace.
-- `key` - the API key to use to authenticate with your [Inngest Cloud](https://www.inngest.com) account. Required if using `replay`.
+- `token` - the auth token to use to authenticate with your [Inngest Cloud](https://www.inngest.com) account. Required if using `replay`.
 
 ### Test `./foo` using production replay
 
@@ -32,7 +32,7 @@ steps:
   - uses: actions/checkout@v3
   - uses: inngest/action-test-functions@v1
     with:
-      key: ${{ secrets.INNGEST_API_KEY }}
+      token: ${{ secrets.INNGEST_AUTH_TOKEN }}
       function: ./foo
       replay: true
       prod: true

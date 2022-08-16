@@ -41,11 +41,11 @@ inputs:
       test workspace. Defaults to false (using test).
     required: false
     default: false
-  key:
+  token:
     description: |-
-      An API key which will be used to authenticate with the Inngest CLI using
-      `inngest login`. Required if replaying events from your Inngest Cloud
-      account.
+      An auth token which will be used to authenticate with the Inngest CLI
+      using `inngest login`. Required if replaying events from your Inngest
+      Cloud account.
     required: false
     default: ""
 
@@ -59,7 +59,7 @@ runs:
     - uses: inngest/setup-inngest@v1
       with:
         version: ${{ inputs.version }}
-        key: ${{ inputs.key }}
+        token: ${{ inputs.token }}
       # Must use `script -e -c` to pretend we have a TTY.
     - name: Test with replayed events
       if: inputs.replay == 'true'

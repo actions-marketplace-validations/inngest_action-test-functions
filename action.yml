@@ -50,8 +50,8 @@ inputs:
     default: ""
 
 branding:
-  icon: terminal
-  color: blue
+  icon: more-horizontal
+  color: purple
 
 runs:
   using: composite

@@ -28,7 +28,7 @@ inputs:
       using generated event data
     required: false
     default: false
-  file:
+  snapshot:
     description: |-
       The path to the file containing event data to use for testing. Defaults to
       empty (""). You can generate and save event data for this purpose using
@@ -67,12 +67,12 @@ runs:
       shell: bash
       working-directory: ${{ inputs.function }}
     - name: Test with snapshotted events
-      if: inputs.replay != 'true' && inputs.file != ''
-      run: script -e -c "cat ${{ inputs.file }} | inngest run"
+      if: inputs.replay != 'true' && inputs.snapshot != ''
+      run: script -e -c "cat ${{ inputs.snapshot }} | inngest run"
       shell: bash
       working-directory: ${{ inputs.function }}
     - name: Test with generated events
-      if: inputs.replay != 'true' && inputs.file == ''
+      if: inputs.replay != 'true' && inputs.snapshot == ''
       run: script -e -c "inngest run"
       shell: bash
       working-directory: ${{ inputs.function }}

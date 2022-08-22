@@ -57,7 +57,7 @@ jobs:
           generateReleaseNotes: true
           tag: ${{ steps.bump.outputs.new_ver }}
         # Also always create or update the major version
-        uses: ncipollo/release-action
+      - uses: ncipollo/release-action
         with:
           tag: ${{ steps.bump.outputs.new_major_ver}}
           allowUpdates: true

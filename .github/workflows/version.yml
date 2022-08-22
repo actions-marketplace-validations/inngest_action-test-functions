@@ -18,6 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          # Get all tags
+          fetch-depth: 0
       - id: state
         run: |
           tags=$(git tag)

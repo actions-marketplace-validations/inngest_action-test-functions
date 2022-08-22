@@ -30,9 +30,9 @@ inputs:
     default: false
   snapshot:
     description: |-
-      The path to the file containing event data to use for testing. Defaults to
-      empty (""). You can generate and save event data for this purpose using
-      `inngest run --snapshot`.
+      The path - relative to the function dir - to the file containing event
+      data to use for testing. Defaults to empty (""). You can generate and save
+      event data for this purpose using `inngest run --snapshot`.
     required: false
     default: ""
   prod:

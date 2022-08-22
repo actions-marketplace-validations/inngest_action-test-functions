@@ -14,9 +14,9 @@ jobs:
         os: [ubuntu-latest]
         replay: [true, false]
         snapshot: ["", "./snapshot.json"]
-      exclude:
-        - replay: true
-          snapshot: "./snapshot.json"
+        exclude:
+          - replay: true
+            snapshot: "./snapshot.json"
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3

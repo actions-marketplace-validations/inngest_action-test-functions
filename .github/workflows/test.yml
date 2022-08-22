@@ -7,7 +7,9 @@ on:
 jobs:
   test:
     name: Test
+    continue-on-error: true
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest]
         replay: [true, false]

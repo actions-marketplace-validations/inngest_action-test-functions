@@ -6,10 +6,10 @@ on:
 
 jobs:
   test:
-    name: Locally tests Inngest function
+    name: Test
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest]
         replay: [true, false]
         snapshot: ["", "./snapshot.json"]
     runs-on: ${{ matrix.os }}

@@ -20,7 +20,10 @@ jobs:
       - uses: actions/checkout@v3
       - id: state
         run: |
+          tags=$(git tag)
+          echo "tags: $tags"
           last_ver=$(git tag | grep '\.' | sort -V | tail -n 1 | xargs)
+          echo "last_ver: $last_ver"
 
           if [ -z "$last_ver" ]; then
           	last_ver="v0.0.0"

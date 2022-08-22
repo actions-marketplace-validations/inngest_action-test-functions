@@ -63,7 +63,7 @@ runs:
       # Must use `script -e -c` to pretend we have a TTY.
     - name: Test with replayed events
       if: inputs.replay == 'true'
-      run: script -e -c "inngest run --replay ${{ inputs.prod == 'true' && '--prod' }}"
+      run: script -e -c "inngest run --replay ${{ inputs.prod == 'true' && '--prod' || '' }}"
       shell: bash
       working-directory: ${{ inputs.function }}
     - name: Test with snapshotted events

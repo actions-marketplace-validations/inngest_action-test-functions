@@ -40,7 +40,6 @@ jobs:
               let MAJOR+=1
           		MINOR=0
           		PATCH=0
-              echo "::set-output name=new_major_ver::v$MAJOR"
               ;;
             minor)
               let MINOR+=1
@@ -52,6 +51,7 @@ jobs:
           esac
 
           echo "::set-output name=new_ver::v$MAJOR.$MINOR.$PATCH"
+          echo "::set-output name=new_major_ver::v$MAJOR"
       - uses: ncipollo/release-action@v1
         with:
           generateReleaseNotes: true

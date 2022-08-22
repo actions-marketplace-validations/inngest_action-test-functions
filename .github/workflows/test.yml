@@ -27,5 +27,5 @@ jobs:
           function: test_fn
           replay: ${{ matrix.replay }}
           snapshot: ${{ matrix.snapshot }}
-          prod: false
+          prod: true
           token: ${{ secrets.INNGEST_AUTH_TOKEN }}
